@@ -39,7 +39,12 @@ camera = picamera.PiCamera()
 def shutter_pressed(channel):
     """ Detect shutter button pressed """
     global camera
-    filename = 'image.jpg'
+    # Sleep a very short time to allow shutters to open
+    time.sleep(0.8)
+    folder = 'images/'
+    #time_str =  time.strftime("%d-%m-%Y_%H-%M-%S", time.gmtime())
+    time_str =  time.strftime("%Y-%m-%d_%H-%M-%S", time.gmtime())
+    filename = folder + time_str + '.jpg'
     camera.capture(filename)
 
 
