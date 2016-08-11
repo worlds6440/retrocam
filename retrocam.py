@@ -17,6 +17,7 @@ GPIO.setup(power_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 camera = picamera.PiCamera()
 
 # Configure camera
+camera.resolution = (1920, 1080)
 # camera.hflip = True
 # camera.vflip = True
 # camera.sharpness = 0
@@ -32,8 +33,6 @@ camera = picamera.PiCamera()
 # camera.image_effect = 'none'
 # camera.color_effects = None
 # camera.rotation = 0
-# camera.hflip = False
-# camera.vflip = False
 # camera.crop = (0.0, 0.0, 1.0, 1.0)
 
 def shutter_pressed(channel):
