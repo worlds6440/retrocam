@@ -35,16 +35,25 @@ camera.resolution = (1920, 1080)
 # camera.rotation = 0
 # camera.crop = (0.0, 0.0, 1.0, 1.0)
 
+time_last = time.time()
+
 def shutter_pressed(channel):
     """ Detect shutter button pressed """
     global camera
-    # Sleep a very short time to allow shutters to open
-    time.sleep(0.8)
-    folder = 'images/'
-    #time_str =  time.strftime("%d-%m-%Y_%H-%M-%S", time.gmtime())
-    time_str =  time.strftime("%Y-%m-%d_%H-%M-%S", time.gmtime())
-    filename = folder + time_str + '.jpg'
-    camera.capture(filename)
+    global time_last
+    # Record time now
+    time_now = time.time()
+    time_diff = time_now - time_last
+    # Only take photo if last photo taken over a second ago
+    if time_diff >= 1.0:
+        time_last = time_now
+        # Sleep a very short time to allow shutters to open
+        time.sleep(0.8)
+        folder = 'images/'
+        #time_str =  time.strftime("%d-%m-%Y_%H-%M-%S", time.gmtime())
+        time_str =  time.strftime("%Y-%m-%d_%H-%M-%S", time.gmtime())
+        filename = folder + time_str + '.jpg'
+        camera.capture(filename)
 
 
 def power_off(channel):
